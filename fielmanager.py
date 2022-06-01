@@ -177,23 +177,29 @@ class FileManager:
     def load_enc_path(self):
         with open("loggedin.txt", "r") as t:
             logged = t.read()
+        o_user = {}
         for i in users:
-            if logged in i:
-                user = i
+            if logged == i["username"] and logged != "":
+                o_user = i
+        if o_user == {}:
+            messagebox.showerror(title="Error", message="You are not logged in!")
+            return
         with open("path.txt", "r") as t:
             path = t.read()
-            encrypt(path, user)
+            encrypt(o_user, path)
+            messagebox.showinfo(title="Success", message="File Encrypted!")
 
     def load_dec_path(self):
         with open("loggedin.txt", "r") as t:
             logged = t.read()
+        o_user = {}
         for i in users:
-            if logged in i:
-                user = i
-        if os.path.exists("path.txt"):
-            with open("path.txt", "r") as file:
-                path = file.read()
-                decrypt(user, path)
-            messagebox.showinfo(title="Success", message="Successfully Decrypted.")
-        else:
-            messagebox.showerror(title="Error", message="No file selected.")
+            if logged == i["username"] and logged != "":
+                o_user = i
+        if o_user == {}:
+            messagebox.showerror(title="Error", message="You are not logged in!")
+            return
+        with open("path.txt", "r") as file:
+            path = file.read()
+            decrypt(o_user, path)
+        messagebox.showinfo(title="Success", message="Successfully Decrypted.")
