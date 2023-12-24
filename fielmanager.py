@@ -6,7 +6,7 @@ from functools import partial
 from cryptography.fernet import Fernet
 from pymongo import MongoClient
 
-mc = MongoClient('mongodb+srv://user1234:user1234@cluster0.mzxtq.mongodb.net/AlternativeAssessment?retryWrites=true&w=majority')
+mc = MongoClient('')
 db = mc['AlternativeAssessment']
 db_users = db['TkUsers']
 
